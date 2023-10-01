@@ -1,0 +1,14 @@
+version: "3"
+services:
+  f4:
+    build: .
+    environment:
+      - DISPLAY=docker.for.mac.host.internal:0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - config:/home/f4/.eclipse
+      - ${WORKSPACE}:/home/f4/f4workspace
+      - ${INTERPRETERS}:/home/f4/interpreters
+
+volumes:
+  config:
