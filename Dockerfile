@@ -8,16 +8,13 @@ RUN wget https://github.com/xored/f4/releases/download/v1.1.6/f4-1.1.6-linux-gtk
     rm /tmp/f4.zip && \
     chmod +x /opt/f4/F4
 
-RUN useradd --user-group --create-home --system --skel /dev/null f4
-USER f4
+WORKDIR /root/f4
+RUN mkdir /root/interpreters && \
+    mkdir /root/.eclipse
 
-WORKDIR /home/f4
-RUN mkdir /home/f4/f4workspace && \
-    mkdir /home/f4/interpreters && \
-    mkdir /home/f4/.eclipse
-
-VOLUME /home/f4/f4workspace
-VOLUME /home/f4/interpreters
-VOLUME /home/f4/.eclipse
+# f4workspace is created automatically by f4 install
+VOLUME /root/f4workspace
+VOLUME /root/interpreters
+VOLUME /root/.eclipse
 
 ENTRYPOINT /opt/f4/F4
